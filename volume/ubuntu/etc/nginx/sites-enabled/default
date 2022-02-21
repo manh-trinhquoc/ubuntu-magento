@@ -73,13 +73,13 @@ server {
         #       fastcgi_pass 127.0.0.1:9000;
         #}
 
+
         location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 # try_files $uri $uri/ /app/webroot/$uri /index.php?$args =404;
-                try_files $uri $uri/ /app/webroot/$uri  /index.php?$args;
+                try_files $uri $uri/ =404;
         }
-        
 
         location ~ \.php$ {
                 fastcgi_pass php:9000;
@@ -90,37 +90,6 @@ server {
                 fastcgi_read_timeout 600;
                 include fastcgi_params ;     
         }
-
-       
-
-        location /theme/default/ {
-                alias /var/www/app/View/Themed/Default/webroot/;
-        }
-
-        location /uploads/ {
-                root /var/www/app/webroot/;
-        }
-
-        location /thumb/ {
-                # rewrite   ([0-9]+)x([0-9]+)/(.*)  /$3;
-                
-               alias /var/www/app/webroot/;
-                rewrite   ([0-9]+)x([0-9]+)/(.*)  /thumb/timthumb.php?src=http://$http_host/$3&w=$1&h=$2&zc=1&q=100 last;
-                location ~ \.php$ {
-                        fastcgi_pass php:9000;
-                        fastcgi_buffers 16 16k;
-                        fastcgi_buffer_size 32k;
-                        fastcgi_param SCRIPT_FILENAME $request_filename;
-                        #fixes timeouts
-                        fastcgi_read_timeout 600;
-                        include fastcgi_params ;     
-                }
-                
-        }
-
-        # location  /thumb/([0-9]+)x([0-9]+)/ {
-        #        alias /var/www/;
-        # }
 
 
         # deny access to .htaccess files, if Apache's document root

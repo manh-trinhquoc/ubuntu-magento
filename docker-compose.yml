@@ -1,7 +1,7 @@
 version: '3'
 
 services:
- ubuntu:
+  ubuntu:
     build:
       context: .
       dockerfile: Ubuntu.Dockerfile
@@ -12,7 +12,6 @@ services:
       - ./volume/ubuntu/etc/nginx/sites-enabled:/etc/nginx/sites-enabled
 
       - ./magento:/var/www/
-    container_name: ubuntu
     depends_on:
       - php
       - db
@@ -20,22 +19,20 @@ services:
     build:
       context: .
       dockerfile: Php.Dockerfile
-    # image: php:7.1-fpm
-    container_name: php
     volumes:
-      # - ./volume/www/:/var/www/
-      - ./palace.sunshinegroup.vn/public_html:/var/www/
+      - ./magento:/var/www/
   db:
     image: mysql:5.6
     # restart: always
     environment:
-      MYSQL_DATABASE: sunshinepa_db
+      MYSQL_DATABASE: magento_demo
       MYSQL_USER: test
       MYSQL_PASSWORD: Abcde123
       # MYSQL_RANDOM_ROOT_PASSWORD: '1'
       MYSQL_ROOT_PASSWORD: Abcde123
     volumes:
-      - ./mysqldump/sunshinepa_db.sql:/docker-entrypoint-initdb.d/sunshinepa_db.sql  
+      # - ./mysqldump/sunshinepa_db.sql:/docker-entrypoint-initdb.d/sunshinepa_db.sql  
+      - 'mariadb_data:/var/lib/mysql'
   adminer:
     image: adminer
     # restart: always

@@ -11,3 +11,5 @@ RUN openssl req -x509 -nodes -days 3650 -subj "/C=CA/ST=QC/O=Company, Inc./CN=lo
 RUN apt-get update && apt-get install -y software-properties-common curl
 
 ENTRYPOINT nginx && tail -F -n 2 /var/log/nginx/error.log
+
+WORKDIR /var/www/  

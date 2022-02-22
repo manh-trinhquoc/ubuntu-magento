@@ -21,9 +21,8 @@ services:
       dockerfile: Php.Dockerfile
     volumes:
       - ./magento:/var/www/
-      # - ./volume/php/tmp/magento/:/tmp/magento/
   db:
-    image: mysql:5.6
+    image: mysql:8
     # restart: always
     environment:
       MYSQL_DATABASE: magento_demo

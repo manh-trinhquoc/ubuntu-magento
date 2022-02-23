@@ -21,6 +21,10 @@ services:
       dockerfile: Php.Dockerfile
     volumes:
       - ./magento:/var/www/
+    depends_on:
+      - db
+    links:
+    - db
   db:
     image: mysql:8
     # restart: always
@@ -38,6 +42,8 @@ services:
     # restart: always
     ports:
       - 9080:8080
+    depends_on:
+      - db
   elasticsearch:
     image: docker.io/bitnami/elasticsearch:7
     volumes:

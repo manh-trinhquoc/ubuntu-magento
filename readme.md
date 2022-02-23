@@ -7,3 +7,7 @@
  - bin/magento setup:install   --base-url=http://localhost --base-url-secure=https://localhost   --db-host=db   --db-name=magento_demo   --db-user=test   --db-password=Abcde123   --admin-firstname=admin --admin-lastname=admin   --admin-email=admin@admin.com   --admin-user=ubuntu-magento   --admin-password=admin123   --language=en_US   --currency=USD   --timezone=Asia/Ho_Chi_Minh   --use-rewrites=1   --elasticsearch-host=elasticsearch   --elasticsearch-port=9200
 
  - set stickbit để trao quyền ghi của các file tạm như pub,var, generated
+
+ php bin/magento setup:static-content:deploy -f
+
+ bin/magento module:disable Magento_TwoFactorAuth 

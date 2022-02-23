@@ -23,8 +23,6 @@ services:
       - ./magento:/var/www/
     depends_on:
       - db
-    links:
-    - db
   db:
     image: mysql:8
     # restart: always
